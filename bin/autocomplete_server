@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__) + '/../lib')
+begin
+  require 'vegas'
+rescue LoadError
+  require 'rubygems'
+  require 'vegas'
+end
+require 'autocomplete'
+
+
+Vegas::Runner.new(Autocomplete::Server, 'autocomplete_server', {
+  :before_run => lambda {|v|
+    path = (ENV['RESQUECONFIG'] || v.args.first)
+    load path.to_s.strip if path
+  }
+})

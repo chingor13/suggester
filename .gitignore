@@ -1,0 +1,3 @@
+log/*
+**/*.swp
+config/database.yml
