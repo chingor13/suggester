@@ -4,26 +4,30 @@ module Autocomplete
   module Handlers
     class ActiveRecord < Base
 
-      def initialize(klass, id_field, name_field, conditions = {})
-        @klass = klass
-        @id_field = id_field
-        @name_field = name_field
-        @conditions = conditions
+      def initialize(params = {})
+        @klass      = params[:class]      || raise("must specify a class")
+        @klass = @klass.constantize if @klass.is_a?(String)
+        @id_field   = params[:id_field]   || :id
+        @name_field = params[:name_field] || :name
+        @conditions = params[:conditions] || {}
+        super(params)
         build_cache()
       end
 
+      # return an array of entry data (sorted)
       def match(params)
         query = params[:query].downcase
-        results = find_exact_matches(query)
-        results.values.sort{|x,y| x[:name] <=> y[:name]}
+        limit = params[:limit]
+        limit = limit.to_i unless limit.nil?
+        results = find_exact_matches(query, limit)
       end
 
+      # return an array of entry data (sorted)
       def find(params)
         query = params[:query].downcase
-        results = find_begin_matches(query)
-#query2 = removals(query)
-#results.merge!(find_begin_matches(query2))
-        results.values.sort{|x,y| x[:name] <=> y[:name]}
+        limit = params[:limit]
+        limit = limit.to_i unless limit.nil?
+        results = find_begin_matches(query, limit)
       end
 
       protected
@@ -33,31 +37,33 @@ module Autocomplete
       end
 
       def build_cache
-        @cache ||= begin
-          cache = []
-          all_records.each do |entry|
-            cache << build_entry(entry)
-          end
-          cache.sort{|x,y| x[:search_term] <=> y[:search_term]}
+        @cache 
+        records.each do |entry|
+          @cache << build_entry(entry)
         end
+        @cache.sort{|x,y| x[:search_term] <=> y[:search_term]}
       end
 
       def build_entry(record)
         {
-          :search_term => search_term(record).downcase,
+          :search_term => normalize(search_term(record).downcase),
           :data => entry_data(record)
         }
       end
 
       def search_term(record)
-        record.send(:name)
+        record.send(@name_field)
       end
 
       def entry_data(record)
         {
-          :key  =>  record.send(:id),
-          :name =>  record.send(:name)
+          :key  =>  key(record),
+          :name =>  record.send(@name_field)
         }
+      end
+
+      def key(record)
+        record.send(@id_field)
       end
 
     end

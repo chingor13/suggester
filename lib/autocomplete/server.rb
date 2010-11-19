@@ -9,7 +9,7 @@ module Autocomplete
     # list all handlers currently registered
     get "/" do
       output = "<html><body><h1>Autocomplete Handlers</h1>"
-      output << self.class.handlers.keys.sort.map{|n| "<a href='/#{n}/dump'>#{n}</a>"}.join('<br/>')
+      output << self.class.handlers.keys.sort.map{|n| "<a href='/#{n}/dump'>#{n} (#{self.class.handler(n).cache.size})</a>"}.join('<br/>')
       output << "</body></html>"
     end
 
