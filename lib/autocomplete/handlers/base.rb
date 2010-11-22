@@ -5,10 +5,12 @@ module Autocomplete
     class Base
       # name of the field in the data hash that should be unique
       attr_accessor :unique_field_name
-      include Autocomplete::Handlers::Helpers::Refresh
 
+      include Autocomplete::Handlers::Helpers::Refresh
       def initialize(params = {})
         @unique_field_name = params[:unique_field_name] || :display_string
+        @refresh_interval = params.delete(:refresh_interval)
+        @last_refreshed_at = Time.now
         @cache = build_cache
       end
 
@@ -67,7 +69,7 @@ module Autocomplete
         for i in lower_bound..@cache.length
           # stop looking if we are no longer matching OR we have found enough matches
           break if @cache[i][:search_term].index(search_string) != 0 || (limit && results.length >= limit)
-          result << @cache[i]
+          results << @cache[i]
         end
 
         results.map{|r| r[:data]}
@@ -87,7 +89,7 @@ module Autocomplete
         for i in lower_bound..@cache.length
           # stop looking if we are no longer matching OR we have found enough matches
           break if @cache[i][:search_term] != search_string || (limit && results.length >= limit)
-          result << @cache[i]
+          results << @cache[i]
         end
 
         results.map{|r| r[:data]}

@@ -9,6 +9,10 @@ module Autocomplete
           @last_refreshed_at = Time.now
         end
 
+        def force_refresh!
+          @last_refreshed_at = nil
+        end
+
         def needs_refresh?
           return true if last_refreshed_at.nil?
           refresh_interval && last_refreshed_at + refresh_interval.minutes < Time.now
@@ -27,14 +31,6 @@ module Autocomplete
           @last_refreshed_at
         end
 
-        def initialize_with_refresh_params(params = {})
-          @refresh_interval = params.delete(:refresh_interval)
-          initialize_without_refresh_params(params)
-        end
-
-        def self.include(klass)
-          klass.alias_method_chain :initialize, :refresh_params
-        end
       end
     end
   end

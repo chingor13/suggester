@@ -16,8 +16,4 @@ Vegas::Runner.new(Autocomplete::Server, 'autocomplete_server', {
     path = (ENV['AUTOCOMPLETE_CONFIG'] || v.args.first)
     load path.to_s.strip if path
   }
-}) do |runner, opts, app|
-  opts.on('-R REFRESH_RATE', "--refresh-rate REFRESH_RATE", "set the automatic refresh rate (in minutes)") {|refresh_rate|
-    Autocomplete::Server.set_refresh_rate(refresh_rate)
-  }
-end
+})
