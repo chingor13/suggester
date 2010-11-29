@@ -60,7 +60,6 @@ module Autocomplete
         end
         url = url + "?" + s.join("&")
       end
-      pp url
       url
     end
   end
