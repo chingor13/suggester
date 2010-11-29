@@ -1,25 +1,21 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    activerecord (2.3.9)
+      activesupport (= 2.3.9)
     activesupport (2.3.9)
-    columnize (0.3.1)
     git (1.2.5)
     jeweler (1.5.1)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
       rake
     json (1.4.6)
-    linecache (0.43)
     mocha (0.9.8)
       rake
+    mysql (2.8.1)
     rack (1.2.1)
     rake (0.8.7)
     rcov (0.9.9)
-    ruby-debug (0.10.3)
-      columnize (>= 0.1)
-      ruby-debug-base (~> 0.10.3.0)
-    ruby-debug-base (0.10.3)
-      linecache (>= 0.3)
     shoulda (2.11.3)
     sinatra (1.1.0)
       rack (~> 1.1)
@@ -30,12 +26,16 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord (= 2.3.9)
   activesupport (= 2.3.9)
   bundler (~> 1.0.0)
   jeweler (~> 1.5.1)
   json
   mocha
+  mysql
   rcov
-  ruby-debug
   shoulda
   sinatra
+
+METADATA
+  version: 1.0.6

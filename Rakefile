@@ -51,3 +51,20 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+namespace :db do 
+  desc 'setup test activerecord databases'
+  task :prepare do
+    load File.join(File.dirname(__FILE__), 'test', 'test_helper.rb')
+    if RUN_AR_TESTS
+      fixture_sql = File.join(File.dirname(__FILE__), 'test', 'fixtures', 'books.sql')
+      statements = open(fixture_sql).read.split(";")
+      statements.compact!
+      statements.each do |sql|
+        sql.strip!
+        ActiveRecord::Base.connection.execute(sql) unless sql.blank?
+      end
+    end
+  end
+end
+

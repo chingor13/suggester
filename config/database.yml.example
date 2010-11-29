@@ -1,0 +1,6 @@
+test:
+  adapter: <adapter (mysql)>
+  username: <your username>
+  password: <your password>
+  host: <server host>
+  database: autocomplete_test

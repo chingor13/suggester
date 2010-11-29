@@ -66,7 +66,7 @@ module Autocomplete
         results = []
         lower_bound = find_lower_bound(search_string)
 
-        for i in lower_bound..@cache.length
+        for i in lower_bound...@cache.length
           # stop looking if we are no longer matching OR we have found enough matches
           break if @cache[i][:search_term].index(search_string) != 0 || (limit && results.length >= limit)
           results << @cache[i]
@@ -86,7 +86,7 @@ module Autocomplete
         results = []
         lower_bound = find_lower_bound(search_string)
 
-        for i in lower_bound..@cache.length
+        for i in lower_bound...@cache.length
           # stop looking if we are no longer matching OR we have found enough matches
           break if @cache[i][:search_term] != search_string || (limit && results.length >= limit)
           results << @cache[i]
