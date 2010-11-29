@@ -12,7 +12,9 @@ module Autocomplete
     protected
 
       def build_cache()
-        ::Marshal.load(open(@file).read)
+        io = open(@file)
+        cache = ::Marshal.load(io.read)
+        cache.sort{|x,y| x[:search_term] <=> y[:search_term]}
       end
 
     end

@@ -11,7 +11,9 @@ module Autocomplete
     protected
 
       def build_cache()
-        YAML::load(open(@file).read)
+        io = open(@file)
+        cache = YAML::load(io.read)
+        cache.sort{|x,y| x[:search_term] <=> y[:search_term]}
       end
     end
   end
