@@ -9,10 +9,11 @@ rescue LoadError
 end
 require 'autocomplete'
 
+require 'ruby-debug'
 
 Vegas::Runner.new(Autocomplete::Server, 'autocomplete_server', {
   :before_run => lambda {|v|
-    path = (ENV['RESQUECONFIG'] || v.args.first)
+    path = (ENV['AUTOCOMPLETE_CONFIG'] || v.args.first)
     load path.to_s.strip if path
   }
 })

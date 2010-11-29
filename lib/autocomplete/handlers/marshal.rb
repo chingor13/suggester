@@ -2,7 +2,8 @@ require File.expand_path(File.dirname(__FILE__) + '/base')
 
 module Autocomplete
   module Handlers
-    class Yaml < Base
+    class Marshal < Base
+
       def initialize(params = {})
         @file = params.delete(:file) || raise("must specify a file")
         super(params)
@@ -11,10 +12,9 @@ module Autocomplete
     protected
 
       def build_cache()
-        YAML::load(open(@file).read)
+        ::Marshal.load(open(@file).read)
       end
+
     end
   end
 end
-
-
