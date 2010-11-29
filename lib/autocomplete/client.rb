@@ -40,7 +40,7 @@ module Autocomplete
       begin
         Timeout::timeout(0.5) do
           open(url) do |content|
-            response = YAML::load(content.read)
+            response = JSON.parse(content.read)
           end
         end
       rescue Timeout::Error => e
