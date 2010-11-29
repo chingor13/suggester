@@ -1,16 +1,17 @@
 require 'open-uri'
 require 'cgi'
-require 'yaml'
+require 'json'
 require 'timeout'
+
 
 module Autocomplete
   class Client
     attr_accessor :host, :port
     attr_accessor :logger
 
-    # server uses sinatra with default port 4567
+    # server uses sinatra with default port 17500
     DEFAULT_HOST = "localhost"
-    DEFAULT_PORT = 4567
+    DEFAULT_PORT = 17500
 
     def initialize(options = {})
       @host = options[:host] || DEFAULT_HOST
@@ -51,7 +52,7 @@ module Autocomplete
     end
 
     def build_url(type, method, query, options)
-      url = "http://#{@host}:#{@port}/#{type}/#{method}/#{CGI::escape(query)}.yml"
+      url = "http://#{@host}:#{@port}/#{type}/#{method}/#{CGI::escape(query)}.json"
       unless options.empty?
         s = []
         options.each do |k,v|
@@ -59,6 +60,7 @@ module Autocomplete
         end
         url = url + "?" + s.join("&")
       end
+      pp url
       url
     end
   end
