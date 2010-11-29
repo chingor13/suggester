@@ -3,16 +3,7 @@ module Autocomplete
 
     def initialize(*args)
       super(*args)
-      Thread.new do
-        loop do
-          sleep(10)
-          self.class.handlers.each do |name, handler|
-            if handler.needs_refresh?
-              handler.refresh!
-            end
-          end
-        end
-      end
+      spawn_refresh_thread!
     end
 
     # list all handlers currently registered
@@ -97,6 +88,19 @@ module Autocomplete
     def self.add_handler(name, handler)
       @handlers ||= {}
       @handlers[name] = handler
+    end
+
+    private
+
+    def spawn_refresh_thread!
+      Thread.new do
+        loop do
+          sleep(10)
+          self.class.handlers.each do |name, handler|
+            handler.refresh! if handler.needs_refresh?
+          end
+        end
+      end
     end
 
   end
