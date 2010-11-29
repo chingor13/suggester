@@ -1,0 +1,25 @@
+---
+- :data:
+    :id: 500
+    :display_string: "A"
+  :search_term: "a"
+- :data:
+    :id: 600
+    :display_string: "B"
+  :search_term: "b"
+- :data:
+    :id: 700
+    :display_string: "D"
+  :search_term: "d"
+- :data:
+    :id: 800
+    :display_string: "C"
+  :search_term: "c"
+- :data:
+    :id: 900
+    :display_string: "Aardvark"
+  :search_term: "aardvark"
+- :data:
+    :id: 1000
+    :display_string: "Aachen"
+  :search_term: "aachen"

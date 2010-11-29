@@ -1,9 +1,11 @@
 module Autocomplete
 end
-
+require 'rubygems'
+require 'sinatra/base'
+require 'yaml'
+require 'json'
+require 'pp'
+require 'array_bsearch'
 require 'autocomplete/server'
 require 'autocomplete/handlers'
-#list = Dir.glob(File.expand_path(File.dirname(__FILE__) + "/autocomplete/*.rb")).sort
-#list.each do |f|
-#  require f
-#end
+

@@ -1,10 +1,3 @@
-require 'rubygems'
-require 'sinatra/base'
-require 'array_bsearch'
-require 'yaml'
-require 'json'
-require 'pp'
-
 module Autocomplete
   class Server < Sinatra::Base
 
@@ -15,7 +8,6 @@ module Autocomplete
           sleep(10)
           self.class.handlers.each do |name, handler|
             if handler.needs_refresh?
-puts "refreshing #{name}"
               handler.refresh!
             end
           end
