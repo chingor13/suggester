@@ -11,4 +11,5 @@ group :development do
   gem "rcov", ">= 0"
   gem "activerecord", "=2.3.9"
   gem "rack-test"
+  gem "mysql"
 end
