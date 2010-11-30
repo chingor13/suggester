@@ -32,7 +32,7 @@ module Autocomplete
         query = params[:query].downcase
         limit = params[:limit]
         limit = limit.to_i unless limit.nil?
-        results = find_exact_matches(query, limit)
+        results = find_exact_matches(query, limit, params)
       end
 
       # Returns an array of data hashes that begin with params[:query]
@@ -40,7 +40,7 @@ module Autocomplete
         query = params[:query].downcase
         limit = params[:limit]
         limit = limit.to_i unless limit.nil?
-        results = find_begin_matches(query, limit)
+        results = find_begin_matches(query, limit, params)
       end
 
     protected
@@ -62,7 +62,7 @@ module Autocomplete
       #       ...other data
       #     }
       #   ]
-      def find_begin_matches(search_string, limit)
+      def find_begin_matches(search_string, limit, params)
         results = []
         lower_bound = find_lower_bound(search_string)
 
@@ -82,7 +82,7 @@ module Autocomplete
       #       ...other data
       #     }
       #   ]
-      def find_exact_matches(search_string, limit)
+      def find_exact_matches(search_string, limit, params)
         results = []
         lower_bound = find_lower_bound(search_string)
 

@@ -12,7 +12,6 @@ GEM
     json (1.4.6)
     mocha (0.9.8)
       rake
-    mysql (2.8.1)
     rack (1.2.1)
     rack-test (0.5.6)
       rack (>= 1.0)
@@ -34,11 +33,7 @@ DEPENDENCIES
   jeweler (~> 1.5.1)
   json
   mocha
-  mysql
   rack-test
   rcov
   shoulda
   sinatra
-
-METADATA
-  version: 1.0.6

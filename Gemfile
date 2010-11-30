@@ -10,6 +10,5 @@ group :development do
   gem "jeweler", "~> 1.5.1"
   gem "rcov", ">= 0"
   gem "activerecord", "=2.3.9"
-  gem "mysql"
   gem "rack-test"
 end
