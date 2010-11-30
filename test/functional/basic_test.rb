@@ -2,7 +2,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), "../test_helper.rb"))
 require 'rack/test'
 
 Autocomplete::Server.add_handler("yaml_handler", Autocomplete::Handlers::Yaml.new(:file => File.expand_path(File.join(File.dirname(__FILE__), '..', 'fixtures', 'yaml.yml'))))
-Autocomplete::Server.add_handler("marshal_handler", Autocomplete::Handlers::Yaml.new(:file => File.expand_path(File.join(File.dirname(__FILE__), '..', 'fixtures', 'marshal.marshal'))))
+Autocomplete::Server.add_handler("marshal_handler", Autocomplete::Handlers::Marshal.new(:file => File.expand_path(File.join(File.dirname(__FILE__), '..', 'fixtures', 'marshal.marshal'))))
 
 class BasicTest < Test::Unit::TestCase
   include Rack::Test::Methods
