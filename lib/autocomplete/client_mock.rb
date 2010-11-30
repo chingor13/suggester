@@ -4,11 +4,11 @@ module Autocomplete
       @mocks = {}
     end
 
-    def match(handler, query, options = {})
+    def match(handler, query, opts = {})
       get_test_response_results("match", handler, query, opts)
     end
 
-    def find(handler, query, options = {})
+    def find(handler, query, opts = {})
       get_test_response_results("find", handler, query, opts)
     end
 
@@ -29,7 +29,7 @@ module Autocomplete
 
     private
 
-    def get_test_response_results(type, handler, opts)
+    def get_test_response_results(type, handler, query, opts)
       key = "#{type}--#{handler}"
       match = @mocks[key].and.detect do |m|
         options_match?(m[:opts], opts)
