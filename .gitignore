@@ -2,3 +2,4 @@ log/*
 *.swp
 config/database.yml
 nbproject
+.bundle/*
