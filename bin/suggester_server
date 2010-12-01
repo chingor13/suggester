@@ -9,8 +9,6 @@ rescue LoadError
 end
 require 'suggester'
 
-require 'ruby-debug'
-
 Vegas::Runner.new(Suggester::Server, 'suggester_server', {
   :before_run => lambda {|v|
     path = (ENV['Suggester_CONFIG'] || v.args.first)
