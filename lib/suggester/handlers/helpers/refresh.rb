@@ -1,4 +1,4 @@
-module Autocomplete
+module Suggester
   module Handlers
     module Helpers
       module Refresh

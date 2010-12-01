@@ -1,12 +1,12 @@
-require 'autocomplete/handlers/helpers/refresh'
+require 'suggester/handlers/helpers/refresh'
 
-module Autocomplete
+module Suggester
   module Handlers
     class Base
       # name of the field in the data hash that should be unique
       attr_accessor :unique_field_name
 
-      include Autocomplete::Handlers::Helpers::Refresh
+      include Suggester::Handlers::Helpers::Refresh
       def initialize(params = {})
         @unique_field_name = params[:unique_field_name] || :display_string
         @refresh_interval = params.delete(:refresh_interval)

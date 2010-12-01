@@ -4,7 +4,7 @@ require 'json'
 require 'timeout'
 
 
-module Autocomplete
+module Suggester
   class Client
     attr_accessor :host, :port
     attr_accessor :logger

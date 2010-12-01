@@ -12,11 +12,11 @@ require 'rake'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "autocomplete"
-  gem.homepage = "http://github.com/chingor13/autocomplete"
+  gem.name = "suggester"
+  gem.homepage = "http://github.com/chingor13/suggester"
   gem.license = "MIT"
-  gem.summary = %Q{Extensible, cache-based autocomplete server for ruby.}
-  gem.description = %Q{Extensible, cache-based autocomplete server for ruby. Includes refresh and replication support out of the box.}
+  gem.summary = %Q{Extensible, cache-based auto-suggest server for ruby.}
+  gem.description = %Q{Extensible, cache-based auto-suggest server for ruby. Includes refresh and replication support out of the box.}
   gem.email = "ching.jeff@gmail.com"
   gem.authors = ["Jeff Ching"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
@@ -47,7 +47,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "autocomplete #{version}"
+  rdoc.title = "suggester #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
@@ -62,7 +62,7 @@ namespace :db do
       statements.compact!
       statements.each do |sql|
         sql.strip!
-        ActiveRecord::Base.connection.execute(sql) unless sql.blank?
+        ActiveRecord::Base.connection.execute(sql) unless sql.nil? || sql.empty?
       end
     end
   end

@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/base')
 
-module Autocomplete
+module Suggester
   module Handlers
     class Marshal < Base
 

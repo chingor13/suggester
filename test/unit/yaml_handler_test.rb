@@ -4,19 +4,19 @@ class YamlHandlerTest < ActiveSupport::TestCase
 
   should "raise exception if no file given" do
     assert_raises RuntimeError do
-      handler = Autocomplete::Handlers::Yaml.new
+      handler = Suggester::Handlers::Yaml.new
     end
   end
 
   should "load basic yaml file" do
     assert_nothing_raised do
-      handler = Autocomplete::Handlers::Yaml.new(:file => yaml_file)
+      handler = Suggester::Handlers::Yaml.new(:file => yaml_file)
       assert_equal(6, handler.cache.length)
     end
   end
 
   should "load a sorted cache" do
-    handler = Autocomplete::Handlers::Yaml.new(:file => yaml_file)
+    handler = Suggester::Handlers::Yaml.new(:file => yaml_file)
     search_strings = handler.cache.map{|entry| entry[:search_term]}
     sorted_search_strings = search_strings.sort
     assert_equal(sorted_search_strings, search_strings)
@@ -25,15 +25,15 @@ class YamlHandlerTest < ActiveSupport::TestCase
   should "load yaml from uri" do
     # stub the open uri
     OpenURI.stubs(:open_uri).returns(File.open(yaml_file))
-    url = "http://autocomplete.server.com/handler/dump.yml"
+    url = "http://suggester.server.com/handler/dump.yml"
     assert_nothing_raised do
-      handler = Autocomplete::Handlers::Yaml.new(:file => url)
+      handler = Suggester::Handlers::Yaml.new(:file => url)
       assert_equal(6, handler.cache.length)
     end
   end
 
   should "find begins with matches" do
-    handler = Autocomplete::Handlers::Yaml.new(:file => yaml_file)
+    handler = Suggester::Handlers::Yaml.new(:file => yaml_file)
     matches = handler.find(:query => "a")
     assert_equal(3, matches.length)
 
@@ -42,7 +42,7 @@ class YamlHandlerTest < ActiveSupport::TestCase
   end
 
   should "find exact matches" do
-    handler = Autocomplete::Handlers::Yaml.new(:file => yaml_file)
+    handler = Suggester::Handlers::Yaml.new(:file => yaml_file)
     matches = handler.match(:query => "aar")
     assert_equal(0, matches.length)
 
@@ -51,7 +51,7 @@ class YamlHandlerTest < ActiveSupport::TestCase
   end
 
   should "normalize search string" do
-    handler = Autocomplete::Handlers::Yaml.new(:file => yaml_file)
+    handler = Suggester::Handlers::Yaml.new(:file => yaml_file)
     matches = handler.match(:query => "AARDVARK")
     assert_equal(1, matches.length)
   end

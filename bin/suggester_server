@@ -7,13 +7,13 @@ rescue LoadError
   require 'rubygems'
   require 'vegas'
 end
-require 'autocomplete'
+require 'suggester'
 
 require 'ruby-debug'
 
-Vegas::Runner.new(Autocomplete::Server, 'autocomplete_server', {
+Vegas::Runner.new(Suggester::Server, 'suggester_server', {
   :before_run => lambda {|v|
-    path = (ENV['AUTOCOMPLETE_CONFIG'] || v.args.first)
+    path = (ENV['Suggester_CONFIG'] || v.args.first)
     load path.to_s.strip if path
   }
 })

@@ -3,8 +3,8 @@ ENV["RAILS_ENV"] = "test"
 # add to the load path (done by loading gems for you, just not in test)
 $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
 
-# require the autocomplete files
-require 'autocomplete'
+# require the suggester files
+require 'suggester'
 require 'bundler'
 Bundler.setup
 require 'active_support'

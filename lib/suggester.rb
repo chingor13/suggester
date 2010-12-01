@@ -1,4 +1,4 @@
-module Autocomplete
+module Suggester
 end
 require 'rubygems'
 require 'sinatra/base'
@@ -7,6 +7,6 @@ require 'json'
 require 'open-uri'
 require 'pp'
 require 'array_bsearch'
-require 'autocomplete/server'
-require 'autocomplete/handlers'
+require 'suggester/server'
+require 'suggester/handlers'
 

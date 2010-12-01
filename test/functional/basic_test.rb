@@ -1,14 +1,14 @@
 require File.expand_path(File.join(File.dirname(__FILE__), "../test_helper.rb"))
 require 'rack/test'
 
-Autocomplete::Server.add_handler("yaml_handler", Autocomplete::Handlers::Yaml.new(:file => File.expand_path(File.join(File.dirname(__FILE__), '..', 'fixtures', 'yaml.yml'))))
-Autocomplete::Server.add_handler("marshal_handler", Autocomplete::Handlers::Marshal.new(:file => File.expand_path(File.join(File.dirname(__FILE__), '..', 'fixtures', 'marshal.marshal'))))
+Suggester::Server.add_handler("yaml_handler", Suggester::Handlers::Yaml.new(:file => File.expand_path(File.join(File.dirname(__FILE__), '..', 'fixtures', 'yaml.yml'))))
+Suggester::Server.add_handler("marshal_handler", Suggester::Handlers::Marshal.new(:file => File.expand_path(File.join(File.dirname(__FILE__), '..', 'fixtures', 'marshal.marshal'))))
 
 class BasicTest < Test::Unit::TestCase
   include Rack::Test::Methods
 
   def app
-    Autocomplete::Server
+    Suggester::Server
   end
 
   should "list all handlers on index page" do
@@ -74,7 +74,7 @@ class BasicTest < Test::Unit::TestCase
 
   should "refresh" do
     # handler shouldn't need a refresh
-    assert !Autocomplete::Server.handler("yaml_handler").needs_refresh?
+    assert !Suggester::Server.handler("yaml_handler").needs_refresh?
 
     # force the server to refresh when it gets a chance
     get '/yaml_handler/refresh'
@@ -82,11 +82,11 @@ class BasicTest < Test::Unit::TestCase
     assert_equal("OK", last_response.body)
 
     # should need a refresh
-    assert Autocomplete::Server.handler("yaml_handler").needs_refresh?
+    assert Suggester::Server.handler("yaml_handler").needs_refresh?
 
     # restore state
-    Autocomplete::Server.handler("yaml_handler").refresh!
-    assert !Autocomplete::Server.handler("yaml_handler").needs_refresh?
+    Suggester::Server.handler("yaml_handler").refresh!
+    assert !Suggester::Server.handler("yaml_handler").needs_refresh?
   end
 
   should "fail to refresh non-existent handler" do

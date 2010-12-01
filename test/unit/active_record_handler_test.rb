@@ -7,13 +7,13 @@ class ActiveRecordHandlerTest < ActiveSupport::TestCase
 
     should "raise exception if no class given" do
       assert_raises RuntimeError do
-        handler = Autocomplete::Handlers::ActiveRecord.new()
+        handler = Suggester::Handlers::ActiveRecord.new()
       end
     end
 
     should "load basic active_record handler" do
       assert_nothing_raised do
-        handler = Autocomplete::Handlers::ActiveRecord.new( :class => Book, 
+        handler = Suggester::Handlers::ActiveRecord.new( :class => Book, 
                                                             :id_field => :id, 
                                                             :name_field => :title)
         assert_equal(6, handler.cache.length)
@@ -21,7 +21,7 @@ class ActiveRecordHandlerTest < ActiveSupport::TestCase
     end
 
     should "load a sorted cache" do
-      handler = Autocomplete::Handlers::ActiveRecord.new( :class => Book, 
+      handler = Suggester::Handlers::ActiveRecord.new( :class => Book, 
                                                           :id_field => :id, 
                                                           :name_field => :title)
       search_strings = handler.cache.map{|entry| entry[:search_term]}
@@ -30,7 +30,7 @@ class ActiveRecordHandlerTest < ActiveSupport::TestCase
     end
 
     should "find begins with matches" do
-      handler = Autocomplete::Handlers::ActiveRecord.new( :class => Book, 
+      handler = Suggester::Handlers::ActiveRecord.new( :class => Book, 
                                                           :id_field => :id, 
                                                           :name_field => :title)
       matches = handler.find(:query => "the")
@@ -41,7 +41,7 @@ class ActiveRecordHandlerTest < ActiveSupport::TestCase
     end
 
     should "find exact matches" do
-      handler = Autocomplete::Handlers::ActiveRecord.new( :class => Book, 
+      handler = Suggester::Handlers::ActiveRecord.new( :class => Book, 
                                                           :id_field => :id, 
                                                           :name_field => :title)
       matches = handler.match(:query => "the")
@@ -52,7 +52,7 @@ class ActiveRecordHandlerTest < ActiveSupport::TestCase
     end
 
     should "normalize search string" do
-      handler = Autocomplete::Handlers::ActiveRecord.new( :class => Book, 
+      handler = Suggester::Handlers::ActiveRecord.new( :class => Book, 
                                                           :id_field => :id, 
                                                           :name_field => :title)
       matches = handler.find(:query => "THE")

@@ -1,4 +1,4 @@
-module Autocomplete
+module Suggester
   class Server < Sinatra::Base
 
     def initialize(*args)
@@ -8,7 +8,7 @@ module Autocomplete
 
     # list all handlers currently registered
     get "/" do
-      output = "<html><body><h1>Autocomplete Handlers</h1>"
+      output = "<html><body><h1>Suggester Handlers</h1>"
       output << self.class.handlers.keys.sort.map{|n| "<a href='/#{n}/dump.html'>#{n} (#{self.class.handler(n).cache.size})</a>"}.join('<br/>')
       output << "</body></html>"
     end

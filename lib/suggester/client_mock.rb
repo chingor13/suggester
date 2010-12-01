@@ -1,4 +1,4 @@
-module Autocomplete
+module Suggester
   class ClientMock
     def initialize(options = {})
       @mocks = {}
