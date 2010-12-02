@@ -10,13 +10,14 @@ module Suggester
         @id_field   = params[:id_field]   || :id
         @name_field = params[:name_field] || :name
         @conditions = params[:conditions] || {}
+        @include    = params[:include]   || {}
         super(params)
       end
 
       protected
 
       def all_records
-        @klass.find(:all, :conditions => @conditions)
+        @klass.find(:all, :include => @include, :conditions => @conditions)
       end
 
       def build_cache
