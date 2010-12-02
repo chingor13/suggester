@@ -44,9 +44,9 @@ module Suggester
           end
         end
       rescue Timeout::Error => e
-        @logger.error("Timeout: #{e}") if @logger
+        @logger.error("Timeout: #{e}\n#{url}") if @logger
       rescue => e
-        @logger.error("Error: #{e}") if @logger
+        @logger.error("Error: #{e}\nURL: #{url}\nStack Trace:\n#{e.backtrace}") if @logger
       end
       response
     end
