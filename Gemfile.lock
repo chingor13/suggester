@@ -38,3 +38,6 @@ DEPENDENCIES
   rcov
   shoulda
   sinatra
+
+METADATA
+  version: 1.0.6

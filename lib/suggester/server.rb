@@ -1,3 +1,10 @@
+require 'sinatra/base'
+require 'yaml'
+require 'json'
+require 'open-uri'
+require 'array_bsearch'
+require File.expand_path(File.join(File.dirname(__FILE__), 'handlers.rb'))
+
 module Suggester
   class Server < Sinatra::Base
 

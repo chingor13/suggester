@@ -3,7 +3,6 @@ require 'cgi'
 require 'json'
 require 'timeout'
 
-
 module Suggester
   class Client
     attr_accessor :host, :port

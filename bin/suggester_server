@@ -8,6 +8,7 @@ rescue LoadError
   require 'vegas'
 end
 require 'suggester'
+require 'suggester/server'
 
 Vegas::Runner.new(Suggester::Server, 'suggester_server', {
   :before_run => lambda {|v|
