@@ -5,6 +5,7 @@ $:.unshift(File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib')))
 
 # require the suggester files
 require 'suggester'
+require 'suggester/server'
 require 'bundler'
 Bundler.setup
 require 'active_support'
