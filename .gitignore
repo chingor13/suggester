@@ -3,3 +3,4 @@ log/*
 config/database.yml
 nbproject
 .bundle/*
+.idea/*
