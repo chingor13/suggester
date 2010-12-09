@@ -1,3 +1,11 @@
+# This is the core server for the Suggester gem.  It extends the basic sinatra server
+# and provides a basic interface to browse and query the server.
+#
+# The server supports output in HTML, YAML, JSON, and Marshal output
+#
+# Author::    Jeff Ching
+# Copyright:: Copyright(c) 2010
+# License::   Distribues under the same terms as Ruby
 require 'sinatra/base'
 require 'yaml'
 require 'json'
@@ -6,8 +14,11 @@ require 'array_bsearch'
 require File.expand_path(File.join(File.dirname(__FILE__), 'handlers.rb'))
 
 module Suggester
+  # Core server class
   class Server < Sinatra::Base
 
+    # Create an instance of the server. At this time, we spawn a separate thread
+    # that will reload handlers as needed to prevent locking the server thread.
     def initialize(*args)
       super(*args)
       spawn_refresh_thread!
@@ -72,6 +83,7 @@ module Suggester
       end
     end
 
+    # force a refresh of the specified handler
     get "/:handler/refresh" do
       handler = params.delete("handler")
 
@@ -83,15 +95,18 @@ module Suggester
       end
     end
 
+    # Returns the hash of all handler names to their instances
     def self.handlers
       @handlers
     end
 
+    # Returns the handler instance given the handler name
     def self.handler(name)
       @handlers ||= {}
       @handlers[name]
     end
 
+    # Register a handler instance to its handler name
     def self.add_handler(name, handler)
       @handlers ||= {}
       @handlers[name] = handler
@@ -99,7 +114,7 @@ module Suggester
 
     private
 
-    def spawn_refresh_thread!
+    def spawn_refresh_thread! #:nodoc:
       Thread.new do
         loop do
           sleep(10)

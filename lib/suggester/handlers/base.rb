@@ -1,3 +1,10 @@
+# Base abstract class for the handlers.  Provides basic functionality allowing
+# the caches to be searched.  Provides basic functionality allowing the
+# cache to be refreshed.
+#
+# Author::    Jeff Ching
+# Copyright:: Copyright (c) 2010
+# License::   Distributes under the same terms as Ruby
 require 'suggester/handlers/helpers/refresh'
 
 module Suggester
