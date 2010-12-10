@@ -23,6 +23,8 @@ GEM
       rack (~> 1.1)
       tilt (~> 1.1)
     tilt (1.1)
+    vegas (0.1.8)
+      rack (>= 1.0.0)
 
 PLATFORMS
   ruby
@@ -38,3 +40,4 @@ DEPENDENCIES
   rcov
   shoulda
   sinatra
+  vegas

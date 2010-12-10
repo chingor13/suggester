@@ -1,6 +1,7 @@
 source :rubygems
 gem "sinatra"
 gem "json"
+gem "vegas"
 
 group :development do
   gem "bundler", "~> 1.0.0"
