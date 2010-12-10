@@ -5,18 +5,22 @@
 
 Gem::Specification.new do |s|
   s.name = %q{suggester}
-  s.version = "0.0.2"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Ching"]
-  s.date = %q{2010-12-01}
+  s.date = %q{2010-12-09}
   s.default_executable = %q{suggester_server}
   s.description = %q{Extensible, cache-based auto-suggest server for ruby. Includes refresh and replication support out of the box.}
   s.email = %q{ching.jeff@gmail.com}
   s.executables = ["suggester_server"]
+  s.extra_rdoc_files = [
+    "README.md"
+  ]
   s.files = [
     "Gemfile",
     "Gemfile.lock",
+    "README.md",
     "Rakefile",
     "VERSION",
     "bin/suggester_server",
@@ -24,7 +28,6 @@ Gem::Specification.new do |s|
     "lib/array_bsearch.rb",
     "lib/suggester.rb",
     "lib/suggester/client.rb",
-    "lib/suggester/client_mock.rb",
     "lib/suggester/handlers.rb",
     "lib/suggester/handlers/active_record.rb",
     "lib/suggester/handlers/base.rb",
@@ -34,6 +37,8 @@ Gem::Specification.new do |s|
     "lib/suggester/handlers/yaml.rb",
     "lib/suggester/server.rb",
     "pkg/suggester-0.0.1.gem",
+    "pkg/suggester-0.0.2.gem",
+    "suggester.gemspec",
     "test/fixtures/books.sql",
     "test/fixtures/marshal.marshal",
     "test/fixtures/yaml.yml",
@@ -63,37 +68,25 @@ Gem::Specification.new do |s|
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<sinatra>, [">= 0"])
       s.add_runtime_dependency(%q<json>, [">= 0"])
-      s.add_development_dependency(%q<shoulda>, [">= 0"])
-      s.add_development_dependency(%q<mocha>, [">= 0"])
+      s.add_runtime_dependency(%q<vegas>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.5.1"])
       s.add_development_dependency(%q<rcov>, [">= 0"])
-      s.add_development_dependency(%q<activerecord>, ["= 2.3.9"])
-      s.add_development_dependency(%q<rack-test>, [">= 0"])
-      s.add_development_dependency(%q<mysql>, [">= 0"])
     else
       s.add_dependency(%q<sinatra>, [">= 0"])
       s.add_dependency(%q<json>, [">= 0"])
-      s.add_dependency(%q<shoulda>, [">= 0"])
-      s.add_dependency(%q<mocha>, [">= 0"])
+      s.add_dependency(%q<vegas>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
       s.add_dependency(%q<rcov>, [">= 0"])
-      s.add_dependency(%q<activerecord>, ["= 2.3.9"])
-      s.add_dependency(%q<rack-test>, [">= 0"])
-      s.add_dependency(%q<mysql>, [">= 0"])
     end
   else
     s.add_dependency(%q<sinatra>, [">= 0"])
     s.add_dependency(%q<json>, [">= 0"])
-    s.add_dependency(%q<shoulda>, [">= 0"])
-    s.add_dependency(%q<mocha>, [">= 0"])
+    s.add_dependency(%q<vegas>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.5.1"])
     s.add_dependency(%q<rcov>, [">= 0"])
-    s.add_dependency(%q<activerecord>, ["= 2.3.9"])
-    s.add_dependency(%q<rack-test>, [">= 0"])
-    s.add_dependency(%q<mysql>, [">= 0"])
   end
 end
 
