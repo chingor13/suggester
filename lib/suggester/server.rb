@@ -84,14 +84,24 @@ module Suggester
     end
 
     # force a refresh of the specified handler
-    get "/:handler/refresh" do
+    get "/:handler/refresh.:format" do
+      format = params.delete("format")
       handler = params.delete("handler")
 
       if current_handler = self.class.handler(handler)
         current_handler.force_refresh!
-        "OK"
+        response = {"return" => "OK"}
       else
-        "FAIL"
+        response = {"return" => "FAIL"}
+      end
+
+      case(format)
+      when 'yml'
+        response.to_yaml
+      when 'json'
+        response.to_json
+      else
+        response.inspect
       end
     end
 

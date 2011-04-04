@@ -71,9 +71,9 @@ module Suggester
     #
     # * <tt>type</tt> - The name of the handler to refresh
     def refresh(type)
-      url = "http://#{@host}:#{@port}/#{type}/refresh"
+      url = "http://#{@host}:#{@port}/#{type}/refresh.json"
       response = fetch_response(url)
-      return response.is_a?(String) && response == "OK"
+      return response.is_a?(Hash) && response["return"] == "OK"
     end
 
   private

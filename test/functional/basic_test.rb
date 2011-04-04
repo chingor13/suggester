@@ -77,9 +77,10 @@ class BasicTest < Test::Unit::TestCase
     assert !Suggester::Server.handler("yaml_handler").needs_refresh?
 
     # force the server to refresh when it gets a chance
-    get '/yaml_handler/refresh'
+    get '/yaml_handler/refresh.json'
     assert last_response.ok?
-    assert_equal("OK", last_response.body)
+    response = JSON.parse(last_response.body)
+    assert_equal("OK", response["return"])
 
     # should need a refresh
     assert Suggester::Server.handler("yaml_handler").needs_refresh?
@@ -90,9 +91,10 @@ class BasicTest < Test::Unit::TestCase
   end
 
   should "fail to refresh non-existent handler" do
-    get '/non_existent/refresh'
+    get '/non_existent/refresh.json'
     assert last_response.ok?
-    assert_equal("FAIL", last_response.body)
+    response = JSON.parse(last_response.body)
+    assert_equal("FAIL", response["return"])
   end
 
 end
