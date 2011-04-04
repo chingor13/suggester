@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{suggester}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeff Ching"]
-  s.date = %q{2010-12-09}
+  s.date = %q{2011-04-04}
   s.default_executable = %q{suggester_server}
   s.description = %q{Extensible, cache-based auto-suggest server for ruby. Includes refresh and replication support out of the box.}
   s.email = %q{ching.jeff@gmail.com}
@@ -51,7 +51,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/chingor13/suggester}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.rubygems_version = %q{1.6.0}
   s.summary = %q{Extensible, cache-based auto-suggest server for ruby.}
   s.test_files = [
     "test/functional/basic_test.rb",
@@ -62,7 +62,6 @@ Gem::Specification.new do |s|
   ]
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
