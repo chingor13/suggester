@@ -54,9 +54,11 @@ module Suggester
     end
 
     # find exact matches for the query string
-    get "/:handler/match/:query.:format" do
+    get "/:handler/match/*.:format" do
       format = params.delete("format")
       handler = params.delete("handler")
+      query = params.delete("splat").first
+      params[:query] = query
       matches = self.class.handler(handler).match(params)
       case(format)
       when 'yml'
@@ -69,9 +71,11 @@ module Suggester
     end
 
     # find matches that begin with the query string
-    get "/:handler/find/:query.:format" do
+    get "/:handler/find/*.:format" do
       format = params.delete("format")
       handler = params.delete("handler")
+      query = params.delete("splat").first
+      params[:query] = query
       matches = self.class.handler(handler).find(params)
       case(format)
       when 'yml'
