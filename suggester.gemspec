@@ -8,11 +8,12 @@ Gem::Specification.new do |s|
   s.version = "0.1.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Jeff Ching}]
+  s.authors = ["Jeff Ching"]
   s.date = %q{2011-06-17}
+  s.default_executable = %q{suggester_server}
   s.description = %q{Extensible, cache-based auto-suggest server for ruby. Includes refresh and replication support out of the box.}
   s.email = %q{ching.jeff@gmail.com}
-  s.executables = [%q{suggester_server}]
+  s.executables = ["suggester_server"]
   s.extra_rdoc_files = [
     "README.md"
   ]
@@ -48,9 +49,9 @@ Gem::Specification.new do |s|
     "test/unit/yaml_handler_test.rb"
   ]
   s.homepage = %q{http://github.com/chingor13/suggester}
-  s.licenses = [%q{MIT}]
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.5}
+  s.licenses = ["MIT"]
+  s.require_paths = ["lib"]
+  s.rubygems_version = %q{1.3.7}
   s.summary = %q{Extensible, cache-based auto-suggest server for ruby.}
   s.test_files = [
     "test/functional/basic_test.rb",
@@ -61,6 +62,7 @@ Gem::Specification.new do |s|
   ]
 
   if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
