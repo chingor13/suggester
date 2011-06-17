@@ -16,6 +16,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), 'handlers.rb'))
 module Suggester
   # Core server class
   class Server < Sinatra::Base
+    ACCEPTED_FORMATS = ['yml', 'json', 'html']
 
     # Create an instance of the server. At this time, we spawn a separate thread
     # that will reload handlers as needed to prevent locking the server thread.
@@ -49,41 +50,45 @@ module Suggester
         output << data.map{|r| r.inspect}.join('<br/>')
         output << "</body></html>"
       else
-        "BAD FORMAT"
+        invalid_format
       end
     end
 
     # find exact matches for the query string
-    get "/:handler/match/*.:format" do
-      format = params.delete("format")
+    get "/:handler/match/*" do
       handler = params.delete("handler")
-      query = params.delete("splat").first
-      params[:query] = query
+      format, params[:query] = parse_format_and_query_from_splat(params)
       matches = self.class.handler(handler).match(params)
       case(format)
       when 'yml'
         matches.to_yaml
       when 'json'
         matches.to_json
+      when 'html'
+        output = "<html><body>"
+        output << matches.map{|r| r.inspect}.join('<br/>')
+        output << "</body></html>"
       else
-        matches.inspect
+        invalid_format
       end
     end
 
     # find matches that begin with the query string
-    get "/:handler/find/*.:format" do
-      format = params.delete("format")
+    get "/:handler/find/*" do
       handler = params.delete("handler")
-      query = params.delete("splat").first
-      params[:query] = query
+      format, params[:query] = parse_format_and_query_from_splat(params)
       matches = self.class.handler(handler).find(params)
       case(format)
       when 'yml'
         matches.to_yaml
       when 'json'
         matches.to_json
+      when 'html'
+        output = "<html><body>"
+        output << matches.map{|r| r.inspect}.join('<br/>')
+        output << "</body></html>"
       else
-        matches.inspect
+        invalid_format
       end
     end
 
@@ -104,8 +109,12 @@ module Suggester
         response.to_yaml
       when 'json'
         response.to_json
+      when 'html'
+        output = "<html><body>"
+        output << response.map{|r| r.inspect}.join('<br/>')
+        output << "</body></html>"
       else
-        response.inspect
+        invalid_format
       end
     end
 
@@ -127,6 +136,33 @@ module Suggester
     end
 
     private
+
+    def parse_format_and_query_from_splat(params)
+      # get the splat param(s) - Array of arrays.
+      splat = params.delete("splat")
+      return nil, nil unless splat.kind_of?(Array)
+      
+      # were only expecting one splat, get the first one and split it on period
+      splat = splat.first.split(".")
+      
+      # format is the last token
+      format = splat.pop
+      
+      # If format isn't acceptable, push it back onto splat and set format to nil
+      unless ACCEPTED_FORMATS.include?(format)
+        splat.push(format) 
+        format = nil
+      end
+      # join the array of of splat as query
+      query = splat.join(".")
+ 
+      # return format and query
+      return format, query
+    end
+
+    def invalid_format(message = "Invalid Format")
+      [ 404, {'Content-Type' => 'text/plain'},  message ]
+    end
 
     def spawn_refresh_thread! #:nodoc:
       Thread.new do
